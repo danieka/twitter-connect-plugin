@@ -49,6 +49,9 @@ public class TwitterConnect extends CordovaPlugin {
 		final Activity activity = this.cordova.getActivity();
 		final Context context = activity.getApplicationContext();
 		cordova.setActivityResultCallback(this);
+		if (!Fabric.isInitialized()) {
+			Fabric.with(cordova.getActivity().getApplicationContext(), new Twitter(new TwitterAuthConfig(getTwitterKey(), getTwitterSecret())));
+		}
 		if (action.equals("login")) {
 			login(activity, callbackContext);
 			return true;
